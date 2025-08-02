@@ -7,7 +7,7 @@
   <h2>Minhas Árvores Plantadas</h2>
   <ul>
     {% for tree in trees %}
-      <li>{{ tree.plant.name }} - ({{ tree.latitude }}, {{ tree.longitude }}) em {{ tree.planted_at }}</li>
+      <li>{{ tree.plant.name }} - {{ tree.latitude|stringformat:".6f" }}, {{ tree.longitude|stringformat:".6f" }}) em {{ tree.planted_at }}</li>
     {% empty %}
       <li>Nenhuma árvore plantada ainda.</li>
     {% endfor %}

@@ -7,7 +7,7 @@
   <h2>Árvores Plantadas por Usuários das Minhas Contas</h2>
   <ul>
     {% for tree in trees %}
-      <li>{{ tree.plant.name }} - {{ tree.user.username }} - ({{ tree.latitude }}, {{ tree.longitude }})</li>
+      <li>{{ tree.plant.name }} - {{ tree.user.username }} - {{ tree.latitude|stringformat:".6f" }}, {{ tree.longitude }})</li>
     {% empty %}
       <li>Nenhuma árvore encontrada.</li>
     {% endfor %}

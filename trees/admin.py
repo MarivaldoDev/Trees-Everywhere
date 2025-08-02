@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, Profile, Account, Plant, PlantedTree
+
+from .models import Account, Plant, PlantedTree, Profile, User
 
 
 # Inline para associar contas ao usuário no admin
@@ -11,30 +12,30 @@ class AccountInline(admin.TabularInline):
 
 class UserAdmin(BaseUserAdmin):
     inlines = [AccountInline]
-    list_display = ('username', 'email', 'is_staff')
-    search_fields = ('username', 'email')
+    list_display = ("username", "email", "is_staff")
+    search_fields = ("username", "email")
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'joined_at')
-    search_fields = ('user__username',)
+    list_display = ("user", "joined_at")
+    search_fields = ("user__username",)
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active')
-    list_editable = ('is_active',)
-    search_fields = ('name',)
+    list_display = ("name", "is_active")
+    list_editable = ("is_active",)
+    search_fields = ("name",)
 
 
 class PlantedTreeInline(admin.TabularInline):
     model = PlantedTree
     extra = 0
-    readonly_fields = ('user', 'latitude', 'longitude', 'planted_at')
+    readonly_fields = ("user", "latitude", "longitude", "planted_at")
 
 
 class PlantAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
+    list_display = ("name",)
+    search_fields = ("name",)
     inlines = [PlantedTreeInline]
 
 
