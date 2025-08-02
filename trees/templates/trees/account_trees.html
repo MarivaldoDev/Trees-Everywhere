@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Árvores das Minhas Contas</title>
+</head>
+<body>
+  <h2>Árvores Plantadas por Usuários das Minhas Contas</h2>
+  <ul>
+    {% for tree in trees %}
+      <li>{{ tree.plant.name }} - {{ tree.user.username }} - ({{ tree.latitude }}, {{ tree.longitude }})</li>
+    {% empty %}
+      <li>Nenhuma árvore encontrada.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
