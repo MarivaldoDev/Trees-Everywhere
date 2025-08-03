@@ -77,6 +77,10 @@ python manage.py test
 
 ---
 
+## Observação:
+O cadastro de usuários foi mantido exclusivamente via painel administrativo, conforme prática comum em sistemas internos com controle de acesso. O foco do teste foi implementar as regras de negócio, relacionamentos e funcionalidades solicitadas.
+
+
 ## 📄 Autor
 
 Desenvolvido por Marivaldo Pedro
