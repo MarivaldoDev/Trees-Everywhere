@@ -8,6 +8,12 @@ from django.views.generic.edit import CreateView
 
 from .forms import PlantedTreeForm
 from .models import PlantedTree, User
+from django.shortcuts import render, redirect
+
+
+
+def home(request):
+    return render(request, "trees/home.html")
 
 
 class MyTreesView(LoginRequiredMixin, ListView):
@@ -19,7 +25,8 @@ class MyTreesView(LoginRequiredMixin, ListView):
         return PlantedTree.objects.filter(user=self.request.user)
 
 
-class AddTreeView(LoginRequiredMixin, CreateView):
+
+class AddTreeView(LoginRequiredMixin, CreateView): 
     model = PlantedTree
     form_class = PlantedTreeForm
     template_name = "trees/add_tree.html"
@@ -28,6 +35,10 @@ class AddTreeView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    def handle_no_permission(self):
+        return redirect("trees:login")
+
 
 
 class TreeDetailView(LoginRequiredMixin, DetailView):
@@ -40,6 +51,9 @@ class TreeDetailView(LoginRequiredMixin, DetailView):
         if tree.user != request.user:
             return HttpResponseForbidden("Você não pode ver essa árvore.")
         return super().dispatch(request, *args, **kwargs)
+    
+    def handle_no_permission(self):
+        return redirect("trees:login")
 
 
 class AccountTreesView(LoginRequiredMixin, ListView):
@@ -53,6 +67,9 @@ class AccountTreesView(LoginRequiredMixin, ListView):
             "id", flat=True
         )
         return PlantedTree.objects.filter(user__id__in=related_users_ids)
+    
+    def handle_no_permission(self):
+        return redirect("trees:login")
 
 
 class UserPlantedTreesAPI(LoginRequiredMixin, View):
@@ -68,3 +85,6 @@ class UserPlantedTreesAPI(LoginRequiredMixin, View):
             for tree in trees
         ]
         return JsonResponse(data, safe=False)
+    
+    def handle_no_permission(self):
+        return redirect("trees:login")

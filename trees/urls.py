@@ -6,6 +6,7 @@ from . import views
 app_name = "trees"
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="trees/login.html"),
