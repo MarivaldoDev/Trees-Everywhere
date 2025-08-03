@@ -30,6 +30,7 @@ Compatível com versões Python `>=3.11`
 ```bash
 git clone https://github.com/seu-usuario/trees-everywhere.git
 cd trees-everywhere
+```
 
 2. Crie e ative um ambiente virtual:
 
